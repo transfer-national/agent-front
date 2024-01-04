@@ -1,0 +1,48 @@
+.containerHome {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding-top: 30px;
+    background-color: #F5F5F5;
+    height: 100vh;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.containerButton{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    width:500px;
+  }
+
+  .button{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 7px;
+    background-color: #B63EFF;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    width: 150px;
+  }
+
+  .retour{
+    background-color: #B9B9B9
+  }
+
+  .inputStyle1 {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width:300px;
+    outline-style: none;
+    margin-right:15px;
+  }
+
+  .containerForm {
+    margin-top: 25px;
+  }

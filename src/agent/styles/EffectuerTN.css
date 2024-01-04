@@ -1,0 +1,152 @@
+.containerHome {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding-top: 30px;
+    background-color: #F5F5F5;
+    height: 100vh;
+}
+
+.cercleStyle {
+    border-radius: 100%;
+    padding:5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    background-color: #FFD688;
+    width:40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ligneStyle {
+  width: 60px;
+  border: 1px solid #FFD688;
+}
+
+.header1{
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+}
+
+.select {
+    background-color: #FFBB37;
+}
+
+
+.styleSelect {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:  0.3s;
+    margin-right:2%;
+    width:500px;
+  }
+  
+  .styleSelect:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .styleSelect span {
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  .st {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .st span {
+    display: block; 
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: 5px; 
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  .st span:hover {
+    background-color: #f0f0f0;
+  }
+
+
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
+
+  .inputStyle {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width:500px;
+    outline-style: none;
+  }
+
+
+  .containerButton{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    width:400px;
+  }
+
+  .button{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 7px;
+    background-color: #B63EFF;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    width: 150px;
+    cursor: pointer;
+  }
+
+  .button label{
+    cursor: pointer;
+  }
+
+  .retour{
+    background-color: #B9B9B9
+  }
+
+
+  .cont {
+    font-size: 15px;
+    margin-bottom: 11px;
+    font-weight: 400;
+  }
+
+  .sousTitle{
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .contShow {
+    font-size: 15px;
+    margin-bottom: 11px;
+    font-weight: 400;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+  }

@@ -1,0 +1,15 @@
+.elem {
+    border-radius: 20px;
+    border:1px solid white;
+    background-color: white;
+    padding: 20px;
+    width:600px;
+}
+
+.sousElem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
