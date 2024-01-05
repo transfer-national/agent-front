@@ -1,12 +1,12 @@
 
-    .containerbody {
+    body {
         display: flex;
         flex-direction: column; 
-        padding-top: 30px;
         background-color: #F5F5F5;
         height: 100vh;
         font-weight: bold;
         width: 100%;
+        margin-top: 0;
     }
 
 

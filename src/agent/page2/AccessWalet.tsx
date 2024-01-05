@@ -7,9 +7,8 @@ import axios from 'axios';
 import { useAuth } from '../conf/AuthContext';
 import { useAppDispatch, useAppSelector } from '../store/Store'
 import { setClient } from '../store/features/ClientSlice';
-import { setTypeTransf} from '../store/features/TypeSlice';
 
-function EffectuerTN() {
+function CreateWallet() {
     const [showTr , setShowTr] = useState(false);
     const [showId , setShowId] = useState(false);
     const [showTransfert , setShowTransfert] = useState("Type de transfert");
@@ -43,13 +42,7 @@ function EffectuerTN() {
   
     const handleOptionSelect = (option : string , category : string) => {
       if (category === "transfert") {
-        if(option == "En espéce"){
-          setShowTransfert(option);
-          dispatch(setTypeTransf("CASH"));
-        } else if(option == "Débit"){
         setShowTransfert(option);
-        dispatch(setTypeTransf("DEBIT"));
-        }
       } else if (category === "identité") {
         setShowIdentite(option);
       } 
@@ -65,8 +58,8 @@ function EffectuerTN() {
         const response = await axios.get(`${apiUrl}/client/cin/${idNumber}`);
         console.log(response.data);
         if (response.status === 200) {
-          dispatch(setClient(response.data));
           if (response.data.expired) {
+            dispatch(setClient(response.data));
             navigate('/ShowKYC');
           } else {
             navigate('/MAJKYC');
@@ -97,30 +90,8 @@ function EffectuerTN() {
             <div className='cercleStyle'>5</div>
         </div>
         <text className='title'>Accès à la transfer nationale</text>
-        <div>
-      <div className='styleSelect' onClick={() => handlSelect("transfert")}>
-        <span>{showTransfert}</span>
-        <TiArrowSortedDown />
-      </div>
-      {showTr && (
-        <div className='st'>
-          <span  onClick={() => handleOptionSelect('Débit', "transfert")}>Débit</span>
-          <span  onClick={() => handleOptionSelect('En espèce', "transfert")}>En espèce</span>
-         </div>
-      )}
-      </div>
-      <div>
-      <div className='styleSelect' onClick={() => handlSelect("identité")}>
-        <span>{showIdentite}</span>
-        <TiArrowSortedDown />
-      </div>
-      {showId && (
-        <div className='st'>
-          <span  onClick={() => handleOptionSelect('CIN', "identité")}>CIN</span>
-          <span  onClick={() => handleOptionSelect('Passport', "identité")}>Passport</span>
-          </div>
-      )}
-      </div>
+      <input type='text' className='inputStyle' placeholder="Entrer numéro d'identité" value={idNumber} onChange={(e) => SetIdNumber(e.target.value)}/>
+      <input type='text' className='inputStyle' placeholder="Entrer numéro d'identité" value={idNumber} onChange={(e) => SetIdNumber(e.target.value)}/>
       <input type='text' className='inputStyle' placeholder="Entrer numéro d'identité" value={idNumber} onChange={(e) => SetIdNumber(e.target.value)}/>
       <div className='containerButton'>
         <div className='button retour' onClick={handleBack}>
@@ -135,4 +106,4 @@ function EffectuerTN() {
   )
 }
 
-export default EffectuerTN
+export default CreateWallet

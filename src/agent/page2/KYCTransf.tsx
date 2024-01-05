@@ -3,20 +3,32 @@ import Navbar from '../components/Navbar'
 import '../styles/KYC.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../conf/AuthContext';
-
+import { useAppSelector } from '../store/Store'
+import { setClient } from '../store/features/ClientSlice';
 
 function KYCTransf() {
     const navigate = useNavigate();
-    const { clientData} = useAuth();
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data);
+    const typeTransf = useAppSelector((state) => state.typeTransf.typeTransf);
     
     const handleClick = () => {
-       console.log(clientData.ref);
-        navigate('/ShowInfo');
+       console.log(client.ref);
+       if(typeTransf=== "Wallet"){
+        if(client.hasWallet){
+          navigate('/validateRecip');
+        }else {
+        navigate('/CreateWallet');
+        }
+       } else if(typeTransf=== "En espèce"){
+        navigate('/validateRecip');
+       }
       };
   
       const handleBack = () => {
         navigate('/ShowKYC');
       };
+    
 
   return (
     <div>
@@ -25,35 +37,35 @@ function KYCTransf() {
       <text>les informations du KYC</text>
       <div className='containerForm'>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Titre" value={clientData.title} disabled/>
-            <input type="text" className='inputStyle1' placeholder="Prénom" value={clientData.firstName} disabled />
+            <input type="text" className='inputStyle1' placeholder="Titre" value={client.title} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Prénom" value={client.firstName} disabled />
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Nom" value={clientData.lastName} disabled/>
-            <input type="text" className='inputStyle1' placeholder="Type de pièce d'identité" value={clientData.idType} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Nom" value={client.lastName} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Type de pièce d'identité" value={client.idType} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Pays d'émission" value={clientData.emitCountry} disabled/>
-            <input type="text" className='inputStyle1' placeholder="N° pièce d'idntité" value={clientData.idNumber} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Pays d'émission" value={client.emitCountry} disabled/>
+            <input type="text" className='inputStyle1' placeholder="N° pièce d'idntité" value={client.idNumber} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Validité pièce d'identité" value={clientData.idExpiration} disabled/>
-            <input type="text" className='inputStyle1' placeholder="Date de naissance" value={clientData.dob} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Validité pièce d'identité" value={client.idExpiration} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Date de naissance" value={client.dob} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Pays de nationalité" value={clientData.nationality} disabled/>
-            <input type="text" className='inputStyle1' placeholder="Profession" value={clientData.profession} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Pays de nationalité" value={client.nationality} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Profession" value={client.profession} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Pays d'adresse" value={clientData.country} disabled/>
-            <input type="text" className='inputStyle1' placeholder="Adresse légale" value={clientData.address} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Pays d'adresse" value={client.country} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Adresse légale" value={client.address} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Ville" value={clientData.city} disabled/>
-            <input type="text" className='inputStyle1' placeholder="GSM" value={clientData.gsm} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Ville" value={client.city} disabled/>
+            <input type="text" className='inputStyle1' placeholder="GSM" value={client.gsm} disabled/>
         </div>
         <div>
-            <input type="text" className='inputStyle1' placeholder="Email" value={clientData.email} disabled/>
+            <input type="text" className='inputStyle1' placeholder="Email" value={client.email} disabled/>
         </div>
       </div>
       <div className='containerButton'>

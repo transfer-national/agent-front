@@ -4,7 +4,9 @@ import '../styles/EffectuerTN.css'
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
+import { useAppDispatch, useAppSelector } from '../store/Store'
+import { setClient } from '../store/features/ClientSlice';
+import { setTypeTransf} from '../store/features/TypeSlice';
 
 function AccessPay() {
     const [showTr , setShowTr] = useState(false);
@@ -13,10 +15,10 @@ function AccessPay() {
     const [showIdentite , setShowIdentite] = useState("Type d'identité");
     const navigate = useNavigate();
     const [idNumber , SetIdNumber] = useState("");
-    const {setClientData } = useAuth();
-
-
-
+    const dispatch = useAppDispatch();
+    const apiUrl = process.env.REACT_APP_API_URL;
+    
+    
     const handleBack = () => {
       navigate('/');
     };
@@ -36,6 +38,7 @@ function AccessPay() {
     const handleOptionSelect = (option : string , category : string) => {
       if (category === "transfert") {
         setShowTransfert(option);
+        dispatch(setTypeTransf(option));
       } else if (category === "identité") {
         setShowIdentite(option);
       } 
@@ -48,11 +51,11 @@ function AccessPay() {
     const handleSearch = async () => {
 
       try {
-        const response = await axios.get(`http://100.94.242.12:8080/client/cin/${idNumber}`);
+        const response = await axios.get(`${apiUrl}/client/cin/${idNumber}`);
         console.log(response.data);
         if (response.status === 200) {
           if (response.data.expired) {
-            setClientData(response.data);
+            dispatch(setClient(response.data));
             navigate('/KYCTransf');
           } else {
             navigate('/MAJKYC');

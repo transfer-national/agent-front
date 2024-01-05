@@ -5,13 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
-import { useAuth } from '../conf/AuthContext';
+import { useAppDispatch } from '../store/Store'
+import { setLoginData } from '../store/features/LoginSlice'
+
+
 
 
 const Login = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-
-  const {token, setToken , agent , setAgent} = useAuth();
+  const dispatch = useAppDispatch()
+  console.log('API URL:', apiUrl);
 
   const [formData , setFormData] = useState({
     userId:'',
@@ -31,12 +35,11 @@ const Login = () => {
   const handleLogin=async(e: FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try{
-      const response = await axios.post("http://100.94.242.12:8080/auth/login" , formData) ;
+      const response = await axios.post(`${apiUrl}/auth/login` , formData) ;
       console.log(response.data) ;
       console.log(response.data.agent) ;
       console.log(response.data.token);
-      setToken(response.data.token) ;
-      setAgent(response.data.agent) ;
+      dispatch(setLoginData(response.data)) ;
       if(response.data.role === "AGENT"){
         console.log("true") ;
         navigate("home" ,{replace:true})

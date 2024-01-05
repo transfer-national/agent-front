@@ -4,14 +4,19 @@ import '../styles/EffectuerTN.css'
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
+import { useAppDispatch, useAppSelector } from '../store/Store'
+import { setTransfert } from '../store/features/Transfert';
 
 function TransfAccess() {
     const [showId , setShowId] = useState(false);
     const [idTransf , SetIdTransf] = useState("");
-    const {setInfoTransf} = useAuth();
    const [showIdentite , setShowIdentite] = useState("type d’operation");
     const navigate = useNavigate();
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    const transfert = useAppSelector((state: { transfert: { data: any; }; })=> state.transfert.data);
+
+    const dispatch = useAppDispatch();
 
 
 
@@ -32,11 +37,11 @@ function TransfAccess() {
     const handleSearch = async () => {
 
       try {
-        const response = await axios.get(`http://100.94.242.12:8080/transfer/${idTransf}`);
+        const response = await axios.get(`${apiUrl}/transfer/${idTransf}`);
         console.log(response.data);
-        setInfoTransf(response.data);
+        dispatch(setTransfert(response.data));
         if (response.status === 200) {
-            navigate('/AccessPay');
+            navigate('/ShowInfo');
         } else {
           console.log("erreur")
         } 

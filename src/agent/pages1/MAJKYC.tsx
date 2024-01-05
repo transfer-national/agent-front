@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/KYC.css'
@@ -21,6 +22,7 @@ function MAJKYC() {
     const [gsm , setGsm] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const apiUrl = process.env.REACT_APP_API_URL;
     
     const handleClick = () => {
         navigate('/AddAmount');

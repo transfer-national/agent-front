@@ -8,11 +8,12 @@ import Client from '../Models/Client';
 function ClientManagement() {
     const [searchTerm, setSearchTerm] = useState("");
     const [clients , setClients] = useState<Client[]>([]) ;
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const fetchBeneficiaires = async () => {
           try {
-            const response = await axios.get(`http://100.94.242.12:8080/client`);
+            const response = await axios.get(`${apiUrl}/client`);
             const filteredClient = response.data.filter(
               (rec :Client) =>
                 rec.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||

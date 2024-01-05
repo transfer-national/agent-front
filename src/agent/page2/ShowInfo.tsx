@@ -1,23 +1,30 @@
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/EffectuerTN.css'
-import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../conf/AuthContext';
+import { useAppSelector } from '../store/Store'
 
 function ShowInfo() {
   const navigate = useNavigate();
-  const {infoTransf , agent} = useAuth();
-    
+  const apiUrl = process.env.REACT_APP_API_URL; 
+
   const handleClick = () => {
-      navigate('/FindRec');
+      navigate('/AccessPay');
     };
 
     const handleBack = () => {
       navigate('/AddAmount');
     };
 
-    
+    const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data);
+    const transfert = useAppSelector((state: { transfert: { data: any; }; })=> state.transfert.data);
+
+
+    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
+    const headers = {
+    'Authorization': user.token, 
+    };
+
  
   return (
     <div>
@@ -41,24 +48,24 @@ function ShowInfo() {
       <div className='sousTitle'><text >Les informations du donneur d’ordre</text></div>
       <div className='contShow'>
         ID Agent / Wallet du client 
-        <span>{agent.name}</span>
+        <span>{transfert.statuses[0].byUserId}</span>
       </div>
       <div className='contShow'>
       nom complète du DO
-        <span>w-123456789</span>
+        <span>{transfert.sender.firstName} {transfert.sender.lastName}</span>
       </div>
       <div className='contShow'>
       Date d’émission
-        <span>w-123456789</span>
+        <span>{transfert.statuses[0].updatedAt}</span>
       </div>
       <div className='sousTitle'><text >Les informations de l’opération du transfert</text></div>
       <div className='contShow'>
       montant du transfert
-        <span>w-123456789</span>
+        <span>{transfert.amount}</span>
       </div>
       <div className='contShow'>
-      nom complète du B
-        <span>w-123456789</span>
+      nom complète du Bénificiaire
+        <span>{transfert.recipient.firstName} {transfert.recipient.lastName}</span>
       </div>
       </div>
       <div className='containerButton'>

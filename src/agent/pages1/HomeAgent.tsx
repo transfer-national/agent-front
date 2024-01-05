@@ -5,18 +5,20 @@ import { CiUser } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
 import '../styles/HomeAgent.css'
 import { Link } from 'react-router-dom';
-import { useAuth } from '../conf/AuthContext';
+import { useAppSelector } from '../store/Store'
 
 function HomeAgent() {
-    const {token, setToken , agent , setAgent} = useAuth();
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
+    console.log(user)
 
     return (
         <div>
             <Navbar/>
             <div className='containerHome'>
                 <div className='header'>
-                    <p><span>Solde :</span> {agent.balance} DH</p>
-                    <p>Limite de transfert : {agent.threshold} Dh</p>
+                    <p><span>Solde :</span> {user.agent.balance} DH</p>
+                    <p>Limite de transfert : {user.agent.threshold} Dh</p>
                 </div>
                 <div className='containerBoite'>
                 <Link to="/EffectuerTN" className='li'>

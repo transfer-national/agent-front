@@ -150,3 +150,10 @@
     width: 500px;
     justify-content: space-between;
   }
+
+
+  .addStyle {
+    display: flex;
+    flex-direction: column; 
+    padding-top: 30px;
+  }

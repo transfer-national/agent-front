@@ -1,16 +1,20 @@
 import React from 'react'
 import '../styles/Navbar.css'
 import { useAuth } from '../conf/AuthContext';
+import { useAppSelector } from '../store/Store'
 
 function Navbar() {
-    const {agent} = useAuth();
+
+    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
+    console.log(user) 
+
   return (
     <div className='containerNav'>
        <div className='leftSide'>
          <text>Transfert Nationale</text>
        </div>
        <div className='rightSide'>
-            <text>{agent.name}</text>
+            <text>{user.agent.name}</text>
             <div className='cercle'>
                 <text>Agent</text>
             </div>

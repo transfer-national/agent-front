@@ -4,6 +4,7 @@ import '../styles/KYC.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../conf/AuthContext';
 import axios from 'axios';
+import { useAppSelector } from '../store/Store'
 
 function AddKYC() {
     const [title , setTitle] = useState("");
@@ -22,8 +23,14 @@ function AddKYC() {
     const [gsm , setGsm] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
-    const [token , setToken] = useState("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhLTU3NzU4NTc0MDYiLCJpYXQiOjE3MDM5NDAzODUsImV4cCI6MTcwNDAyNjc4NX0.g4PT0YHgjVdMnfnJfYtGLByTlw038WBDGyb478aiS_k")
-     
+    const apiUrl = process.env.REACT_APP_API_URL;
+   
+    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
+    console.log(user);
+    const headers = {
+      'Authorization': user.token, 
+      };
+
     const handleAdd = async () => {
       try {
         const requestData = {
@@ -45,11 +52,8 @@ function AddKYC() {
           byAgentId: null,
         };
 
-        const headers = {
-          'Authorization': `${token}`, 
-        };
 
-        const response = await axios.post(`http://100.94.242.43:8080/client` , requestData , {headers});
+        const response = await axios.post(`${apiUrl}/client` , requestData , {headers});
         console.log("bien");
         navigate('/AddAmount');
       } catch (error) {

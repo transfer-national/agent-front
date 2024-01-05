@@ -11,16 +11,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TransfAccess from './agent/page2/Transfert_Access';
 import ShowInfo from './agent/page2/ShowInfo';
 import AccessPay from './agent/page2/AccessPayment';
-import { AuthProvider } from './agent/conf/AuthContext';
 import AddKYC from './agent/pages1/AddKYC';
 import MAJKYC from './agent/pages1/MAJKYC';
 import Login from './agent/pages1/Login';
 import ClientManagement from './agent/pages1/clientManagement';
 import KYCTransf from './agent/page2/KYCTransf';
+import { Provider } from 'react-redux';
+import { store , persistor} from './agent/store/Store';
+import { PersistGate } from 'redux-persist/integration/react';
+import CreateWallet from './agent/page2/CreateWallet';
+import ValidateRecip from './agent/page2/validateRecip';
 
 function App() {
   return (
-    <AuthProvider>
+    <Provider  store={store}> 
+       <PersistGate loading={null} persistor={persistor}>
       <Router>
         <div>
       <Routes>
@@ -39,10 +44,13 @@ function App() {
         <Route path="/AccessPay" element={<AccessPay/>} />
         <Route path="/clientManagement" element={<ClientManagement/>} />
         <Route path="/KYCTransf" element={<KYCTransf/>} />
+        <Route path="/CreateWallet" element={<CreateWallet />} />
+        <Route path="/validateRecip" element={<ValidateRecip />} />
       </Routes>
       </div>
     </Router>
-    </AuthProvider>
+    </PersistGate>
+    </Provider>   
   );
 }
 

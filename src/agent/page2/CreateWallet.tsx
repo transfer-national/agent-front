@@ -7,14 +7,12 @@ import axios from 'axios';
 import { useAuth } from '../conf/AuthContext';
 import { useAppDispatch, useAppSelector } from '../store/Store'
 import { setClient } from '../store/features/ClientSlice';
-import { setTypeTransf} from '../store/features/TypeSlice';
 
 function EffectuerTN() {
-    const [showTr , setShowTr] = useState(false);
     const [showId , setShowId] = useState(false);
-    const [showTransfert , setShowTransfert] = useState("Type de transfert");
     const [showIdentite , setShowIdentite] = useState("Type d'identité");
     const [idNumber , SetIdNumber] = useState("");
+    const [balance, SetBalance] = useState("");
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -31,30 +29,19 @@ function EffectuerTN() {
 
   
     const handlSelect = (select : string) => {
-      setShowTr(false);
+
       setShowId(false);
   
-      if (select === "transfert") {
-        setShowTr(!showTr);
-      } else if (select === "identité") {
+      if (select === "identité") {
         setShowId(!showId);
       } 
     };
   
     const handleOptionSelect = (option : string , category : string) => {
-      if (category === "transfert") {
-        if(option == "En espéce"){
-          setShowTransfert(option);
-          dispatch(setTypeTransf("CASH"));
-        } else if(option == "Débit"){
-        setShowTransfert(option);
-        dispatch(setTypeTransf("DEBIT"));
-        }
-      } else if (category === "identité") {
+      if (category === "identité") {
         setShowIdentite(option);
       } 
-  
-      setShowTr(false);
+
       setShowId(false);
     };
  
@@ -62,20 +49,14 @@ function EffectuerTN() {
     const handleSearch = async () => {
 
       try {
-        const response = await axios.get(`${apiUrl}/client/cin/${idNumber}`);
-        console.log(response.data);
-        if (response.status === 200) {
-          dispatch(setClient(response.data));
-          if (response.data.expired) {
-            navigate('/ShowKYC');
-          } else {
-            navigate('/MAJKYC');
-          }
-        } else if (response.status === 204) {
-          
-          navigate('/AddKYC');
-        } 
-      } catch (error) {
+        const requestData = {
+            cin : idNumber,
+            balance : balance,
+          }; 
+          const response = await axios.post(`${apiUrl}/wallet` , requestData , {headers});
+          console.log(response.data);
+          navigate('/validateRecip');
+       } catch (error) {
         console.error('');
       }
 
@@ -96,20 +77,8 @@ function EffectuerTN() {
             <div className='ligneStyle' />
             <div className='cercleStyle'>5</div>
         </div>
-        <text className='title'>Accès à la transfer nationale</text>
+        <text className='title'>Ajouter une wallet</text>
         <div>
-      <div className='styleSelect' onClick={() => handlSelect("transfert")}>
-        <span>{showTransfert}</span>
-        <TiArrowSortedDown />
-      </div>
-      {showTr && (
-        <div className='st'>
-          <span  onClick={() => handleOptionSelect('Débit', "transfert")}>Débit</span>
-          <span  onClick={() => handleOptionSelect('En espèce', "transfert")}>En espèce</span>
-         </div>
-      )}
-      </div>
-      <div>
       <div className='styleSelect' onClick={() => handlSelect("identité")}>
         <span>{showIdentite}</span>
         <TiArrowSortedDown />
@@ -122,12 +91,13 @@ function EffectuerTN() {
       )}
       </div>
       <input type='text' className='inputStyle' placeholder="Entrer numéro d'identité" value={idNumber} onChange={(e) => SetIdNumber(e.target.value)}/>
+      <input type='text' className='inputStyle' placeholder="montant" value={balance} onChange={(e) => SetBalance(e.target.value)}/>
       <div className='containerButton'>
         <div className='button retour' onClick={handleBack}>
             <label>Retour</label>
         </div>
         <div className='button'onClick={handleSearch}>
-            <label>Recherche</label>
+            <label>Ajouter</label>
         </div>
       </div>
       </div>
