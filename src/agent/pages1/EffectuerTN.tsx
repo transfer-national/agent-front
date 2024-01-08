@@ -4,7 +4,6 @@ import '../styles/EffectuerTN.css'
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
 import { useAppDispatch, useAppSelector } from '../store/Store'
 import { setClient } from '../store/features/ClientSlice';
 import { setTypeTransf} from '../store/features/TypeSlice';
@@ -20,10 +19,6 @@ function EffectuerTN() {
     const apiUrl = process.env.REACT_APP_API_URL;
 
 
-    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
-    const headers = {
-    'Authorization': user.token, 
-    };
 
     const handleBack = () => {
       navigate('/');
@@ -43,7 +38,7 @@ function EffectuerTN() {
   
     const handleOptionSelect = (option : string , category : string) => {
       if (category === "transfert") {
-        if(option == "En espéce"){
+        if(option == "En espèce"){
           setShowTransfert(option);
           dispatch(setTypeTransf("CASH"));
         } else if(option == "Débit"){

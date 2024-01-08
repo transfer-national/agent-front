@@ -6,24 +6,18 @@ import { useAppSelector } from '../store/Store'
 
 function ShowInfo() {
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL; 
 
   const handleClick = () => {
       navigate('/AccessPay');
     };
 
     const handleBack = () => {
-      navigate('/AddAmount');
+      navigate('/TransfAccess');
     };
 
-    const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data);
     const transfert = useAppSelector((state: { transfert: { data: any; }; })=> state.transfert.data);
 
 
-    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
-    const headers = {
-    'Authorization': user.token, 
-    };
 
  
   return (
@@ -33,13 +27,11 @@ function ShowInfo() {
         <div className='header1'>
             <div className='cercleStyle'>1</div>
             <div className='ligneStyle' />
-            <div className='cercleStyle'>2</div>
+            <div className='cercleStyle select'>2</div>
             <div className='ligneStyle' />
-            <div className='cercleStyle select'>3</div>
+            <div className='cercleStyle '>3</div>
             <div className='ligneStyle' />
             <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
         </div>
         <text className='title'>Affichage des informations</text>
         <div>

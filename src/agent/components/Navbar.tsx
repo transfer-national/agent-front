@@ -1,12 +1,10 @@
 import React from 'react'
 import '../styles/Navbar.css'
-import { useAuth } from '../conf/AuthContext';
 import { useAppSelector } from '../store/Store'
 
 function Navbar() {
 
-    const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
-    console.log(user) 
+  const name=localStorage.getItem('agentName')
 
   return (
     <div className='containerNav'>
@@ -14,7 +12,7 @@ function Navbar() {
          <text>Transfert Nationale</text>
        </div>
        <div className='rightSide'>
-            <text>{user.agent.name}</text>
+            <text>{name}</text>
             <div className='cercle'>
                 <text>Agent</text>
             </div>

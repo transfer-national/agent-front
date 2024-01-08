@@ -21,7 +21,7 @@ function TransfAccess() {
 
 
     const handleBack = () => {
-      navigate('/');
+      navigate('/home');
     };
 
     const handleChange = () =>{
@@ -64,10 +64,8 @@ function TransfAccess() {
             <div className='cercleStyle'>3</div>
             <div className='ligneStyle' />
             <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
         </div>
-        <text className='title'>export default TransfAccess</text>
+        <text className='title'>Consulter un transfert</text>
         <input type='text' className='inputStyle' placeholder="référence du transfert" value={idTransf} onChange={(e) => SetIdTransf(e.target.value)}/>
       <div>
       <div className='styleSelect' onClick={handleChange}>

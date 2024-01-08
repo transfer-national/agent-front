@@ -21,6 +21,8 @@ import { store , persistor} from './agent/store/Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import CreateWallet from './agent/page2/CreateWallet';
 import ValidateRecip from './agent/page2/validateRecip';
+import VerifyCode from './agent/pages1/VerfyCode';
+import AddKYCTrans from './agent/page2/addKYC';
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
         <Route path="/KYCTransf" element={<KYCTransf/>} />
         <Route path="/CreateWallet" element={<CreateWallet />} />
         <Route path="/validateRecip" element={<ValidateRecip />} />
+        <Route path="/VerifyCode" element={<VerifyCode />} />
+        <Route path="/AddKYCTrans" element={<AddKYCTrans />} />
       </Routes>
       </div>
     </Router>

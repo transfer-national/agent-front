@@ -2,13 +2,10 @@ import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/KYC.css'
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../conf/AuthContext';
 import { useAppSelector } from '../store/Store'
-import { setClient } from '../store/features/ClientSlice';
 
 function KYCTransf() {
     const navigate = useNavigate();
-    const apiUrl = process.env.REACT_APP_API_URL;
     const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data);
     const typeTransf = useAppSelector((state) => state.typeTransf.typeTransf);
     
@@ -26,7 +23,7 @@ function KYCTransf() {
       };
   
       const handleBack = () => {
-        navigate('/ShowKYC');
+        navigate('/ShowInfo');
       };
     
 

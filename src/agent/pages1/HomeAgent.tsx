@@ -11,14 +11,16 @@ function HomeAgent() {
     const apiUrl = process.env.REACT_APP_API_URL;
     const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
     console.log(user)
+     const balance =  localStorage.getItem('agentBalance');
+    const threshold = localStorage.getItem('agentThreshold');
 
     return (
         <div>
             <Navbar/>
             <div className='containerHome'>
                 <div className='header'>
-                    <p><span>Solde :</span> {user.agent.balance} DH</p>
-                    <p>Limite de transfert : {user.agent.threshold} Dh</p>
+                    <p><span>Solde :</span> {balance} DH</p>
+                    <p>Limite de transfert : {threshold} Dh</p>
                 </div>
                 <div className='containerBoite'>
                 <Link to="/EffectuerTN" className='li'>
@@ -33,7 +35,7 @@ function HomeAgent() {
                         <text>consultation un TN</text>
                     </div>
                     </Link>
-                    <Link to="/EffectuerTN" className='li'>
+                    <Link to="/clientManagement" className='li'>
                     <div className='boite1 boite3'>
                         <CiUser size={70} />
                         <text>gestions des clients</text>

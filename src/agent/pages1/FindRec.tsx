@@ -9,7 +9,6 @@ import Modal from '@mui/material/Modal';
 import '../styles/KYC.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
 import Recipient from '../Models/Recipient'
 import { setRecipient } from '../store/features/RecipientSlice';
 import { useAppDispatch, useAppSelector } from '../store/Store';
@@ -27,15 +26,13 @@ function FindRec() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useAppDispatch();
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [list,setList]  = useState([])
 
   const handleClick = () => {
     navigate('/AddAmount');
   };
 
   const handleBack = () => {
-    navigate('/Notif');
+    navigate('/ShowKYC');
   };
 
   const client = useAppSelector((state: { client: { data: any; }; }) => state.client.data);
@@ -123,11 +120,11 @@ function FindRec() {
           <div className='ligneStyle' />
           <div className='cercleStyle'>2</div>
           <div className='ligneStyle' />
-          <div className='cercleStyle'>3</div>
-          <div className='ligneStyle' />
+          <div className='cercleStyle select'>3</div>
+          <div className='ligneStyle ' />
           <div className='cercleStyle select'>4</div>
-          <div className='ligneStyle' />
-          <div className='cercleStyle'>5</div>
+            <div className='ligneStyle' />
+            <div className='cercleStyle'>5</div>
         </div>
         <text className='title'>les informations du bénéficiaire</text>
         <div>

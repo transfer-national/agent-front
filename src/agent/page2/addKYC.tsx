@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAppSelector } from '../store/Store'
 
-function AddKYC() {
+function AddKYCTrans() {
     const [title , setTitle] = useState("");
     const [pre , setPre] = useState("");
     const [nom, setNom] = useState("");
@@ -56,7 +56,7 @@ function AddKYC() {
         console.log(response.status)
         if(response.status == 201){
         console.log("bien");
-        navigate('/EffectuerTN');
+        navigate('/AccessPay');
         } else {
         console.log("errreeeeeur")
         }
@@ -67,7 +67,7 @@ function AddKYC() {
     };
 
     const handleBack = () => {
-      navigate('/FindKYC');
+      navigate('/TransfAccess');
     };
     
   return (
@@ -121,4 +121,4 @@ function AddKYC() {
   )
 }
 
-export default AddKYC
+export default AddKYCTrans

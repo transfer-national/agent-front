@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/EffectuerTN.css'
-import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
 import { useAppDispatch, useAppSelector } from '../store/Store'
 import { setClient } from '../store/features/ClientSlice';
 
@@ -25,8 +23,10 @@ function CreateWallet() {
     };
 
     const handleBack = () => {
-      navigate('/');
+      navigate('/ShowInfo');
     };
+
+    
 
   
     const handlSelect = (select : string) => {

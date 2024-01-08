@@ -11,45 +11,61 @@ function AddAmount() {
   const navigate = useNavigate();
   const listRecip = useAppSelector((state) => state.listRecip.listRecip);
   const dispatch = useAppDispatch();
-  const apiUrl = process.env.REACT_APP_API_URL;
   const [feeType, setFeeType] = useState<String>("")
   const [notif, setNotif] = useState(false)
   const [amount, setAmount] = useState("")
+  const [feeAmount, setFeeAmount] = useState("")
+  const [notifAmount, setNotifAmount] = useState("")
   const [reason, setReason] = useState("")
+  const [name, setName] = useState("")
+  const [pre, setPre] = useState("")
   const [id, setId] = useState("");
   const listTransfert  = useAppSelector((state) => state.listTransfert.listTransfert);
-  const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data); 
-  const typeTransf = useAppSelector((state) => state.typeTransf.typeTransf);
-  const user = useAppSelector((state: { login: { data: any; }; })=> state.login.data);
-    console.log(user);
-    const headers = {
-      'Authorization': user.token, 
-    };
-  
+
   const handleClick = () => {
-      navigate('/Notif');
+      navigate('/ValideTransfert');
     };
 
     const handleBack = () => {
-      navigate('/AddAmount');
+      navigate('/FindRec');
     };
 
     const handleFeeType = (option : String) => {
       setFeeType(option);
+      if (option === "SENDER"){
+         setFeeAmount("20");
+      }else if (option === "RECIPIENT"){
+        setFeeAmount("0");
+      } else if (option === "FIFTY_FIFTY"){
+        setFeeAmount("10");
+      }
       console.log(option , notif);
     };
 
     const handleNotif = () => {
       setNotif(!notif);
+      if(notif){
+        setNotifAmount("1");
+      }else {
+        setNotifAmount("0");
+      }
     };
+     
 
     const handleToList = () => {
+
+       const totalAmount =  parseFloat(feeAmount) + parseFloat(notifAmount) + parseFloat(amount)
        const data= {
+        nomRecipient : name,
+        preRecipient: pre,
         recipientId : id,
         amount : parseFloat(amount),
         feeType : feeType,
         notificationEnabled : notif,
         reason: reason,
+        feeAmount: parseFloat(feeAmount),
+        notifAmount: parseFloat(notifAmount),
+        total: totalAmount,
        }
 
       dispatch(addListTransfert(data));
@@ -60,24 +76,6 @@ function AddAmount() {
           dispatch(clearListTransfert());
     }, []);
 
-    const handleAddTransfert = async () => {
-      try {
-        const requestData = {
-           senderRef : client.ref,
-           transferType : typeTransf,
-           unitTransfers : listTransfert
-        };
-
-
-        const response = await axios.post(`${apiUrl}/transfer` , requestData , {headers});
-        console.log("bien");
-        console.log(response.data)
-        navigate('/ValideTransfert')
-      } catch (error) {
-        console.error('');
-      }
-      
-    };
  
   return (
     <div>
@@ -99,8 +97,24 @@ function AddAmount() {
         <div className="addStyle">
         <text className='title'>Pour {rec.firstName} {rec.lastName} </text>
         <text className='title'>La saisie du montant du transfert</text>
-      <input type='text' className='inputStyle' placeholder="montant" value={amount} onChange={(e) => {setAmount(e.target.value); setId(rec.id) }} />
-      <input type='text' className='inputStyle' placeholder="motif de transfert" value={reason} onChange={(e) => setReason(e.target.value)}  />
+      <input type='text' className='inputStyle' placeholder="montant" value={amount} onChange={(e) => {setAmount(e.target.value); setId(rec.id) ; setName( rec.lastName) ; setPre(rec.firstName)}} />
+      <div><select className='inputStyle' value={reason}  onChange={(e)=>setReason(e.target.value)}>
+              <option value=""  disabled selected>Motif de transfert</option>
+              <option value="Soutien familial">Soutien familial</option>
+              <option value="Epargne/investissement">Epargne/investissement</option>
+              <option value="Cadeau">Cadeau</option>
+              <option value="Paiement de biens et de services">Paiement de biens et de services</option>
+              <option value="Frais de dépassement ">Frais de dépassement </option>
+              <option value="Frais d'éducation">Frais d'éducation</option>
+              <option value="Location/Hypothèque ">Location/Hypothèque </option>
+              <option value="Aide de secours/Médicale">Aide de secours/Médicale</option>
+              <option value="Revenu d'un site internet">Revenu d'un site internet</option>
+              <option value="Frais de loterie ou récompense/taxes">Frais de loterie ou récompense/taxes</option>
+              <option value="Prêt">Prêt</option>
+              <option value="Commerce sur internet">Commerce sur internet</option>
+              <option value="Donation">Donation</option>
+              <option value="Autres">Autres (à préciser)</option>
+              </select></div>
       <text className='title'>Notification & Frais de transfert</text>
         <div>
       </div>
@@ -134,7 +148,7 @@ function AddAmount() {
         <div className='button retour' onClick={handleBack}>
             <label>Retour</label>
         </div>
-        <div className='button' onClick={handleAddTransfert}>
+        <div className='button' onClick={handleClick} >
             <label>Suivant</label>
         </div>
       </div>

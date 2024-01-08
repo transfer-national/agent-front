@@ -20,7 +20,7 @@ function AccessPay() {
     
     
     const handleBack = () => {
-      navigate('/');
+      navigate('/ShowInfo');
     };
 
   
@@ -54,15 +54,11 @@ function AccessPay() {
         const response = await axios.get(`${apiUrl}/client/cin/${idNumber}`);
         console.log(response.data);
         if (response.status === 200) {
-          if (response.data.expired) {
             dispatch(setClient(response.data));
             navigate('/KYCTransf');
-          } else {
-            navigate('/MAJKYC');
-          }
         } else if (response.status === 204) {
           
-          navigate('/AddKYC');
+          navigate('/AddKYCTrans');
         } 
       } catch (error) {
         console.error('');
@@ -75,15 +71,13 @@ function AccessPay() {
       <Navbar /> 
       <div className='containerHome'>
         <div className='header1'>
-            <div className='cercleStyle select'>1</div>
+            <div className='cercleStyle'>1</div>
             <div className='ligneStyle' />
             <div className='cercleStyle'>2</div>
             <div className='ligneStyle' />
-            <div className='cercleStyle'>3</div>
+            <div className='cercleStyle select'>3</div>
             <div className='ligneStyle' />
             <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
         </div>
         <text className='title'>Accès à la transfer nationale</text>
         <div>

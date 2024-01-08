@@ -2,20 +2,17 @@ import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/KYC.css'
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../conf/AuthContext';
 import { useAppSelector } from '../store/Store'
-import { setClient } from '../store/features/ClientSlice';
 
 function ShowKYC() {
     const navigate = useNavigate();
-    const apiUrl = process.env.REACT_APP_API_URL;
     
     const handleClick = () => {
         navigate('/FindRec');
       };
   
       const handleBack = () => {
-        navigate('/ShowKYC');
+        navigate('/EffectuerTN');
       };
     
       const client = useAppSelector((state: { client: { data: any; }; })=> state.client.data);

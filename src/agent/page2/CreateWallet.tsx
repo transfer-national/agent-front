@@ -4,9 +4,7 @@ import '../styles/EffectuerTN.css'
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../conf/AuthContext';
 import { useAppDispatch, useAppSelector } from '../store/Store'
-import { setClient } from '../store/features/ClientSlice';
 
 function EffectuerTN() {
     const [showId , setShowId] = useState(false);
@@ -14,7 +12,6 @@ function EffectuerTN() {
     const [idNumber , SetIdNumber] = useState("");
     const [balance, SetBalance] = useState("");
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const apiUrl = process.env.REACT_APP_API_URL;
 
 
@@ -24,7 +21,7 @@ function EffectuerTN() {
     };
 
     const handleBack = () => {
-      navigate('/');
+      navigate('/KYCTransf');
     };
 
   
@@ -66,17 +63,6 @@ function EffectuerTN() {
     <div>
       <Navbar /> 
       <div className='containerHome'>
-        <div className='header1'>
-            <div className='cercleStyle select'>1</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>2</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>3</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
-        </div>
         <text className='title'>Ajouter une wallet</text>
         <div>
       <div className='styleSelect' onClick={() => handlSelect("identité")}>
