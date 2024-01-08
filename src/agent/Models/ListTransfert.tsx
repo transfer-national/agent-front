@@ -3,7 +3,7 @@ import Recipient from "./Recipient";
 import Statuses from "./Statuses";
 
 export default interface ListTransfert {
-    nomRecipient : String,
+    nomRecipient : String ,
     preRecipient : String,
     recipientId : String,
     amount : number,

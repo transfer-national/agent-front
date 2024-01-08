@@ -77,6 +77,7 @@ function FindRec() {
 
       const response = await axios.post(`${apiUrl}/client/${client.ref}/recipient`, requestData, { headers });
       console.log("bien");
+      setOpen(false)
     } catch (error) {
       console.error('');
     }
@@ -118,13 +119,11 @@ function FindRec() {
         <div className='header1'>
           <div className='cercleStyle'>1</div>
           <div className='ligneStyle' />
-          <div className='cercleStyle'>2</div>
+          <div className='cercleStyle select'>2</div>
           <div className='ligneStyle' />
-          <div className='cercleStyle select'>3</div>
+          <div className='cercleStyle'>3</div>
           <div className='ligneStyle ' />
-          <div className='cercleStyle select'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
+          <div className='cercleStyle'>4</div>
         </div>
         <text className='title'>les informations du bénéficiaire</text>
         <div>

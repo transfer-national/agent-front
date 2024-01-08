@@ -61,6 +61,8 @@ function EffectuerTN() {
         console.log(response.data);
         if (response.status === 200) {
           dispatch(setClient(response.data));
+          localStorage.setItem('nom', response.data.lastName);
+          localStorage.setItem('prenom', response.data.firstName);
           if (response.data.expired) {
             navigate('/ShowKYC');
           } else {
@@ -88,8 +90,6 @@ function EffectuerTN() {
             <div className='cercleStyle'>3</div>
             <div className='ligneStyle' />
             <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle'>5</div>
         </div>
         <text className='title'>Accès à la transfer nationale</text>
         <div>

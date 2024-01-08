@@ -27,6 +27,9 @@ function ValideTransfert() {
     setMsg("bien")
     setShowMsg(true)
   };
+
+  const lastName = localStorage.getItem('nom');
+  const firstName = localStorage.getItem('prenom');
     
 
   const handleAddTransfert = async () => {
@@ -131,9 +134,7 @@ function ValideTransfert() {
             <div className='ligneStyle' />
             <div className='cercleStyle'>3</div>
             <div className='ligneStyle' />
-            <div className='cercleStyle'>4</div>
-            <div className='ligneStyle' />
-            <div className='cercleStyle select'>5</div>
+            <div className='cercleStyle  select'>4</div>
         </div>
         <text className='title'>la finalisation </text>
         {Array.isArray(listTransfert) && listTransfert.map((rec: ListTransfert) => (
@@ -145,7 +146,7 @@ function ValideTransfert() {
             </div>
             <div className='sousElem'>
                 <text>Nom complète du DO</text>
-                <text>{client.firstName} {client.LastName}</text>
+                <text>{firstName} {lastName}</text>
             </div>
             <div className='sousElem'>
                 <text>type de transfert</text>
