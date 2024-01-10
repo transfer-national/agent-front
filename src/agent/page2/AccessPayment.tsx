@@ -79,7 +79,7 @@ function AccessPay() {
             <div className='ligneStyle' />
             <div className='cercleStyle'>4</div>
         </div>
-        <text className='title'>Accès à la transfer nationale</text>
+        <text className='title'>Accès à la transfert nationale</text>
         <div>
       <div className='styleSelect' onClick={() => handlSelect("transfert")}>
         <span>{showTransfert}</span>

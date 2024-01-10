@@ -42,7 +42,7 @@ function ValidateRecip() {
 
     // Attributs à afficher dans le tableau
     const attributes = ['Nom complet du bénéficiaire:', 'Type de transfert:', 'Montant du transfert:'];
-    const values = [`${client.firstName} ${client.LastName}`, `${typeTransf}`, `${transfert.amount}  DH`]
+    const values = [`${client.firstName} ${client.lastName}`, `${typeTransf}`, `${transfert.amount}  DH`]
 
     for (let j = 0; j < attributes.length; j++) {
       drawCell(attributes[j], tableX, tableY, cellWidth, cellHeight);
